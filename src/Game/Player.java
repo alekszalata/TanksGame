@@ -13,14 +13,21 @@ import Sprites.Sprite;
 
 public class Player extends Entity {
 
+    public static float newX1;
+    public static float newY1;
+
+
+    //green
+
+
     public static final int	SPRITE_SCALE		= 16;
     public static final int	SPRITES_PER_HEADING	= 1;
 
     private enum Heading {
-        NORTH(0 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
-        EAST(6 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
-        SOUTH(4 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
-        WEST(2 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE);
+        NORTH(0 * SPRITE_SCALE, 9 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
+        EAST(6 * SPRITE_SCALE, 9 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
+        SOUTH(4 * SPRITE_SCALE, 9 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
+        WEST(2 * SPRITE_SCALE, 9 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE);
 
         private int	x, y, h, w;
 
@@ -60,38 +67,47 @@ public class Player extends Entity {
     @Override
     public void update(Input input) {
 
-        float newX = x;
-        float newY = y;
+        newX1 = x;
+        newY1 = y;
 
-        if (input.getKey(KeyEvent.VK_UP)) {
-            newY -= speed;
+        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1 , newY1 - speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+            newY1 -= speed;
             heading = Heading.NORTH;
-        } else if (input.getKey(KeyEvent.VK_RIGHT)) {
-            newX += speed;
+        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed , newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+            newX1 += speed;
             heading = Heading.EAST;
-        } else if (input.getKey(KeyEvent.VK_DOWN)) {
-            newY += speed;
+        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1 , newY1 + speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+            newY1 += speed;
             heading = Heading.SOUTH;
-        } else if (input.getKey(KeyEvent.VK_LEFT)) {
-            newX -= speed;
+        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+            newX1 -= speed;
             heading = Heading.WEST;
         }
 
-        if (newX < 0) {
-            newX = 0;
-        } else if (newX >= Game.WIDTH - SPRITE_SCALE * scale) {
-            newX = Game.WIDTH - SPRITE_SCALE * scale;
+        if (newX1 < 0) {
+            newX1 = 0;
+        } else if (newX1 >= Game.WIDTH - SPRITE_SCALE * scale) {
+            newX1 = Game.WIDTH - SPRITE_SCALE * scale;
         }
 
-        if (newY < 0) {
-            newY = 0;
-        } else if (newY >= Game.HEIGHT - SPRITE_SCALE * scale) {
-            newY = Game.HEIGHT - SPRITE_SCALE * scale;
+        if (newY1 < 0) {
+            newY1 = 0;
+        } else if (newY1 >= Game.HEIGHT - SPRITE_SCALE * scale) {
+            newY1 = Game.HEIGHT - SPRITE_SCALE * scale;
         }
+        
 
-        x = newX;
-        y = newY;
+            x = newX1;
+            y = newY1;
 
+    }
+
+    public static float getnewX1(){
+        return newX1;
+    }
+
+    public static float getnewY1(){
+        return newY1;
     }
 
     @Override
