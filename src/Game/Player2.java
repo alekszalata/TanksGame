@@ -10,7 +10,6 @@ import Graphics.Textures;
 import Sprites.SpriteSheet;
 import KeyBoard.Input;
 import Sprites.Sprite;
-import Game.Player;
 
 public class Player2 extends Entity {
 
@@ -19,7 +18,7 @@ public class Player2 extends Entity {
 
     public static float newX2;
     public static float newY2;
-    public static boolean collusion;
+
 
     public static final int	SPRITE_SCALE		= 16;
     public static final int	SPRITES_PER_HEADING	= 1;
@@ -50,7 +49,7 @@ public class Player2 extends Entity {
     private float					speed;
 
     public Player2 (float x, float y, float scale, float speed, Textures atlas) {
-        super(EntityType.Player , x, y);
+        super(EntityType.Player2 , x, y);
 
         heading = Heading.NORTH;
         spriteMap = new HashMap<Heading, Sprite>();
@@ -68,21 +67,21 @@ public class Player2 extends Entity {
     @Override
     public void update(Input input) {
 
-        float newX2 = x;
-        float newY2 = y;
+
+        newX2 = x;
+        newY2 = y;
 
 
-
-        if (input.getKey(KeyEvent.VK_W) && !Collusion.checkCollusion(newX2 , newY2 - speed ,SPRITE_SCALE , SPRITE_SCALE , Player.getnewX1() , Player.getnewY1() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        if (input.getKey(KeyEvent.VK_W) && !Collusion.checkCollusion(newX2 , newY2 - speed ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1,SPRITE_SCALE , SPRITE_SCALE)) {
             newY2 -= speed;
             heading = Heading.NORTH;
-        } else if (input.getKey(KeyEvent.VK_D) && !Collusion.checkCollusion(newX2 + speed , newY2 ,SPRITE_SCALE , SPRITE_SCALE , Player.getnewX1() , Player.getnewY1() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_D) && !Collusion.checkCollusion(newX2 + speed , newY2 ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newX2 += speed;
             heading = Heading.EAST;
-        } else if (input.getKey(KeyEvent.VK_S) && !Collusion.checkCollusion(newX2 , newY2 + speed ,SPRITE_SCALE , SPRITE_SCALE , Player.getnewX1() , Player.getnewY1() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_S) && !Collusion.checkCollusion(newX2 , newY2 + speed ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newY2 += speed;
             heading = Heading.SOUTH;
-        } else if (input.getKey(KeyEvent.VK_A) && !Collusion.checkCollusion(newX2 - speed , newY2 ,SPRITE_SCALE , SPRITE_SCALE , Player.getnewX1() , Player.getnewY1() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_A) && !Collusion.checkCollusion(newX2 - speed , newY2 ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newX2 -= speed;
             heading = Heading.WEST;
         }
@@ -103,15 +102,10 @@ public class Player2 extends Entity {
         x = newX2;
         y = newY2;
 
-    }
+        }
 
-    public static float getnewX2(){
-        return newX2;
-    }
 
-    public static float getnewY2(){
-        return newY2;
-    }
+
 
     @Override
     public void render(Graphics2D g) {

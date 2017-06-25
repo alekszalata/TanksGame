@@ -124,8 +124,8 @@ public class Game implements Runnable {
 
     private void render() {
         Display.clearImage();
-        player.render(graphics);
         player2.render(graphics);
+        player.render(graphics);
         Display.swap();
 
     }

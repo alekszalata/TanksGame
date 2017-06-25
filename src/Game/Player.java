@@ -11,10 +11,13 @@ import Sprites.SpriteSheet;
 import KeyBoard.Input;
 import Sprites.Sprite;
 
+
+
 public class Player extends Entity {
 
     public static float newX1;
     public static float newY1;
+
 
 
     //green
@@ -70,16 +73,16 @@ public class Player extends Entity {
         newX1 = x;
         newY1 = y;
 
-        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1 , newY1 - speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1 , newY1 - speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newY1 -= speed;
             heading = Heading.NORTH;
-        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed , newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed , newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newX1 += speed;
             heading = Heading.EAST;
-        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1 , newY1 + speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1 , newY1 + speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newY1 += speed;
             heading = Heading.SOUTH;
-        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.getnewX2() , Player2.getnewY2() ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newX1 -= speed;
             heading = Heading.WEST;
         }
@@ -95,20 +98,13 @@ public class Player extends Entity {
         } else if (newY1 >= Game.HEIGHT - SPRITE_SCALE * scale) {
             newY1 = Game.HEIGHT - SPRITE_SCALE * scale;
         }
-        
+
 
             x = newX1;
             y = newY1;
 
     }
 
-    public static float getnewX1(){
-        return newX1;
-    }
-
-    public static float getnewY1(){
-        return newY1;
-    }
 
     @Override
     public void render(Graphics2D g) {
