@@ -48,8 +48,8 @@ public class Game implements Runnable {
         textureImage = new Textures(TEXTURE_PATH);
         sheet = new SpriteSheet(textureImage.cut(0 , 0 , 32 , 32) , 2 , 16);
         sprite = new Sprite(sheet , 1);
-        player = new Player(400 , 300 ,3 , 3, textureImage);
-        player2 = new Player2(100 , 100 , 3 , 3 ,textureImage);
+        player = new Player(400 , 300 ,3 , 3,3, textureImage);
+        player2 = new Player2(100 , 100 , 3 , 3, 3 ,textureImage);
         bullets = new ArrayList<Bullet>();
 
 

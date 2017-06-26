@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+import Display.Display;
 import Graphics.Textures;
 import Sprites.SpriteSheet;
 import KeyBoard.Input;
@@ -46,21 +47,23 @@ public class Player extends Entity {
         }
     }
 
-    private Heading					heading;
-    private Map<Heading, Sprite> spriteMap;
-    private float					scale;
-    private float					speed;
-    private boolean firing;
-    private long firingTimer;
-    private long firingDelay;
+    private Heading                    heading;
+    private Map<Heading, Sprite>       spriteMap;
+    public static float                scale;
+    private float                      speed;
+    private boolean                    firing;
+    private long                       firingTimer;
+    private long                       firingDelay;
+    private int                        HP;
 
-    public Player(float x, float y, float scale, float speed, Textures atlas) {
-        super(EntityType.Player , x, y);
+    public Player(float x, float y, float scale, float speed, int HP, Textures atlas) {
+        super(EntityType.Player, x, y);
 
         heading = Heading.NORTH;
         spriteMap = new HashMap<Heading, Sprite>();
         this.scale = scale;
         this.speed = speed;
+        this.HP = HP;
 
         firing = false;
         firingTimer = System.nanoTime();
@@ -80,16 +83,16 @@ public class Player extends Entity {
         newX1 = x;
         newY1 = y;
 
-        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1 , newY1 - speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
+        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1, newY1 - speed, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
             newY1 -= speed;
             heading = Heading.NORTH;
-        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed , newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed, newY1, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
             newX1 += speed;
             heading = Heading.EAST;
-        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1 , newY1 + speed ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1, newY1 + speed, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
             newY1 += speed;
             heading = Heading.SOUTH;
-        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
             newX1 -= speed;
             heading = Heading.WEST;
         }
@@ -98,16 +101,18 @@ public class Player extends Entity {
         if (input.getKey(KeyEvent.VK_ENTER)) firing = true;
 
         if (firing) {
-            long elapsed = (System.nanoTime() - firingTimer)/1000000;
+            long elapsed = (System.nanoTime() - firingTimer) / 1000000;
             if (elapsed > firingDelay) {
-                if (heading == Heading.NORTH) Game.bullets.add(new Bullet(270 , newX1 + 23 , newY1));  //почему 23 а не 16?
-                if (heading == Heading.EAST) Game.bullets.add(new Bullet(0 , newX1 + 46 , newY1 + 23));
-                if (heading == Heading.SOUTH) Game.bullets.add(new Bullet(90 , newX1 + 23 , newY1 + 46));
-                if (heading == Heading.WEST) Game.bullets.add(new Bullet(180 , newX1 , newY1 + 23));
+                if (heading == Heading.NORTH) Game.bullets.add(new Bullet(270, newX1 + 23, newY1 ));  //почему 23 а не 16?
+                if (heading == Heading.EAST) Game.bullets.add(new Bullet(0, newX1 + 46, newY1 + 23));
+                if (heading == Heading.SOUTH) Game.bullets.add(new Bullet(90, newX1 + 23, newY1 + 46));
+                if (heading == Heading.WEST) Game.bullets.add(new Bullet(180, newX1, newY1 + 23));
                 firingTimer = System.nanoTime();
             }
             firing = false;
         }
+
+
 
         if (newX1 < 0) {
             newX1 = 0;
@@ -122,8 +127,8 @@ public class Player extends Entity {
         }
 
 
-            x = newX1;
-            y = newY1;
+        x = newX1;
+        y = newY1;
 
     }
 

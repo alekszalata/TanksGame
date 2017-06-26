@@ -10,7 +10,7 @@ public class Bullet {
     //fields
    public float x;
    public float y;
-   private int r;
+   public static int r;
 
    private Color color1;
 
@@ -18,6 +18,7 @@ public class Bullet {
    private double dx;
    private double dy;
    private double rad;
+
 
 
    //Constructor
@@ -39,7 +40,10 @@ public class Bullet {
         y += dy;
 
         if (x < -r || x > Game.WIDTH + r ||
-            y < -r || y > Game.HEIGHT + r) {
+            y < -r || y > Game.HEIGHT + r ||
+                Collusion.checkShoot( x , y, (float) r, (float) r, Player2.newX2 , Player2.newY2 , Player2.SPRITE_SCALE , Player2.SPRITE_SCALE) ||
+                Collusion.checkShoot( x , y, (float) r, (float) r, Player.newX1 , Player.newY1 , Player.SPRITE_SCALE , Player.SPRITE_SCALE)
+            )  {
             return true;
         }
 
