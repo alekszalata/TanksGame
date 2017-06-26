@@ -50,6 +50,9 @@ public class Player extends Entity {
     private Map<Heading, Sprite> spriteMap;
     private float					scale;
     private float					speed;
+    private boolean firing;
+    private long firingTimer;
+    private long firingDelay;
 
     public Player(float x, float y, float scale, float speed, Textures atlas) {
         super(EntityType.Player , x, y);
@@ -58,6 +61,10 @@ public class Player extends Entity {
         spriteMap = new HashMap<Heading, Sprite>();
         this.scale = scale;
         this.speed = speed;
+
+        firing = false;
+        firingTimer = System.nanoTime();
+        firingDelay = 500;
 
         for (Heading h : Heading.values()) {
             SpriteSheet sheet = new SpriteSheet(h.texture(atlas), SPRITES_PER_HEADING, SPRITE_SCALE);
@@ -85,6 +92,21 @@ public class Player extends Entity {
         } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1 ,SPRITE_SCALE , SPRITE_SCALE , Player2.newX2 , Player2.newY2 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newX1 -= speed;
             heading = Heading.WEST;
+        }
+
+
+        if (input.getKey(KeyEvent.VK_ENTER)) firing = true;
+
+        if (firing) {
+            long elapsed = (System.nanoTime() - firingTimer)/1000000;
+            if (elapsed > firingDelay) {
+                if (heading == Heading.NORTH) Game.bullets.add(new Bullet(270 , newX1 + 23 , newY1));  //почему 23 а не 16?
+                if (heading == Heading.EAST) Game.bullets.add(new Bullet(0 , newX1 + 46 , newY1 + 23));
+                if (heading == Heading.SOUTH) Game.bullets.add(new Bullet(90 , newX1 + 23 , newY1 + 46));
+                if (heading == Heading.WEST) Game.bullets.add(new Bullet(180 , newX1 , newY1 + 23));
+                firingTimer = System.nanoTime();
+            }
+            firing = false;
         }
 
         if (newX1 < 0) {

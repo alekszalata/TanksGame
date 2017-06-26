@@ -7,6 +7,9 @@ import Sprites.SpriteSheet;
 import Utils.Time;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import Graphics.Textures;
 
 public class Game implements Runnable {
@@ -32,6 +35,7 @@ public class Game implements Runnable {
     private Sprite sprite;
     private Player player;
     private Player2 player2;
+    public static ArrayList<Bullet> bullets;
 
 
 
@@ -46,6 +50,9 @@ public class Game implements Runnable {
         sprite = new Sprite(sheet , 1);
         player = new Player(400 , 300 ,3 , 3, textureImage);
         player2 = new Player2(100 , 100 , 3 , 3 ,textureImage);
+        bullets = new ArrayList<Bullet>();
+
+
 
     }
 
@@ -120,12 +127,23 @@ public class Game implements Runnable {
         player.update(input);
         player2.update(input);
 
+        for (int i = 0; i < bullets.size(); i++){
+            boolean remove = bullets.get(i).update();
+            if (remove) {
+                bullets.remove(i);
+                i--;
+            }
+        }
+
     }
 
     private void render() {
         Display.clearImage();
         player2.render(graphics);
         player.render(graphics);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).draw(graphics);
+        }
         Display.swap();
 
     }
