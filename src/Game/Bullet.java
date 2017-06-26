@@ -8,8 +8,8 @@ import java.awt.*;
 public class Bullet {
 
     //fields
-   private float x;
-   private float y;
+   public float x;
+   public float y;
    private int r;
 
    private Color color1;

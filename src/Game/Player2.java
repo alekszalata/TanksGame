@@ -18,7 +18,6 @@ public class Player2 extends Entity {
 
     public static float newX2;
     public static float newY2;
-    public static Heading wayToShoot;
 
 
     public static final int	SPRITE_SCALE		= 16;
@@ -83,19 +82,15 @@ public class Player2 extends Entity {
         if (input.getKey(KeyEvent.VK_W) && !Collusion.checkCollusion(newX2 , newY2 - speed ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1,SPRITE_SCALE , SPRITE_SCALE)) {
             newY2 -= speed;
             heading = Heading.NORTH;
-            wayToShoot = heading;
         } else if (input.getKey(KeyEvent.VK_D) && !Collusion.checkCollusion(newX2 + speed , newY2 ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newX2 += speed;
             heading = Heading.EAST;
-            wayToShoot = heading;
         } else if (input.getKey(KeyEvent.VK_S) && !Collusion.checkCollusion(newX2 , newY2 + speed ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newY2 += speed;
             heading = Heading.SOUTH;
-            wayToShoot = heading;
         } else if (input.getKey(KeyEvent.VK_A) && !Collusion.checkCollusion(newX2 - speed , newY2 ,SPRITE_SCALE , SPRITE_SCALE , Player.newX1 , Player.newY1 ,SPRITE_SCALE , SPRITE_SCALE)) {
             newX2 -= speed;
             heading = Heading.WEST;
-            wayToShoot = heading;
         }
         if (input.getKey(KeyEvent.VK_SPACE)) firing = true;
 
@@ -133,9 +128,6 @@ public class Player2 extends Entity {
         }
 
 
-        public static Heading getHeading(){
-        return wayToShoot;
-        }
 
 
 
