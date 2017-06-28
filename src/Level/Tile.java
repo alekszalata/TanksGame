@@ -22,7 +22,7 @@ public class Tile {
         g.drawImage(image , x , y , null);
     }
 
-    protected TileType type() {
+    public TileType type() {
         return type;
     }
 }

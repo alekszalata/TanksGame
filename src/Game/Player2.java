@@ -24,6 +24,10 @@ public class Player2 extends Entity {
 
     public static final int SPRITE_SCALE = 16;
     public static final int SPRITES_PER_HEADING = 1;
+    public static boolean a;
+    public static boolean b;
+    public static boolean c;
+    public static boolean d;
 
     public enum Heading {
         NORTH(8 * SPRITE_SCALE, 9 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
@@ -47,8 +51,8 @@ public class Player2 extends Entity {
 
     private Heading heading;
     private Map<Heading, Sprite> spriteMap;
-    private float scale;
-    private float speed;
+    public static float scale;
+    public static float speed;
     private boolean firing;
     private long firingTimer;
     private long firingDelay;
@@ -83,16 +87,18 @@ public class Player2 extends Entity {
         newY2 = y;
 
 
-        if (input.getKey(KeyEvent.VK_W) && !Collusion.checkCollusion(newX2, newY2 - speed, SPRITE_SCALE, SPRITE_SCALE, Player.newX1, Player.newY1, SPRITE_SCALE, SPRITE_SCALE)) {
+
+
+        if (input.getKey(KeyEvent.VK_W) && !Collusion.checkCollusion(newX2, newY2 - speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player.newX1, Player.newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale) && !a) {
             newY2 -= speed;
             heading = Heading.NORTH;
-        } else if (input.getKey(KeyEvent.VK_D) && !Collusion.checkCollusion(newX2 + speed, newY2, SPRITE_SCALE, SPRITE_SCALE, Player.newX1, Player.newY1, SPRITE_SCALE, SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_D) && !Collusion.checkCollusion(newX2 + speed, newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player.newX1, Player.newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale) && !b) {
             newX2 += speed;
             heading = Heading.EAST;
-        } else if (input.getKey(KeyEvent.VK_S) && !Collusion.checkCollusion(newX2, newY2 + speed, SPRITE_SCALE, SPRITE_SCALE, Player.newX1, Player.newY1, SPRITE_SCALE, SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_S) && !Collusion.checkCollusion(newX2, newY2 + speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player.newX1, Player.newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale) && !c) {
             newY2 += speed;
             heading = Heading.SOUTH;
-        } else if (input.getKey(KeyEvent.VK_A) && !Collusion.checkCollusion(newX2 - speed, newY2, SPRITE_SCALE, SPRITE_SCALE, Player.newX1, Player.newY1, SPRITE_SCALE, SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_A) && !Collusion.checkCollusion(newX2 - speed, newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player.newX1, Player.newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale) && !d) {
             newX2 -= speed;
             heading = Heading.WEST;
         }
@@ -133,6 +139,7 @@ public class Player2 extends Entity {
         y = newY2;
 
     }
+
 
 
     @Override

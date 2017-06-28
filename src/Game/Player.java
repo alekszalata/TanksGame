@@ -83,16 +83,16 @@ public class Player extends Entity {
         newX1 = x;
         newY1 = y;
 
-        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1, newY1 - speed, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
+        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1, newY1 - speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
             newY1 -= speed;
             heading = Heading.NORTH;
-        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed, newY1, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed, newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
             newX1 += speed;
             heading = Heading.EAST;
-        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1, newY1 + speed, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1, newY1 + speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
             newY1 += speed;
             heading = Heading.SOUTH;
-        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1, SPRITE_SCALE, SPRITE_SCALE, Player2.newX2, Player2.newY2, SPRITE_SCALE, SPRITE_SCALE)) {
+        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
             newX1 -= speed;
             heading = Heading.WEST;
         }

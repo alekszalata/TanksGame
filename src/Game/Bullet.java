@@ -2,6 +2,8 @@ package Game;
 
 import java.awt.*;
 import Level.Level;
+import Level.Tile;
+import Level.TileType;
 
 import static Level.Level.tileMap;
 
@@ -53,14 +55,6 @@ public class Bullet {
         if (Collusion.checkShoot(x, y, (float) r, (float) r, Player2.newX2, Player2.newY2, Player2.SPRITE_SCALE, Player2.SPRITE_SCALE))
             DMG_TO_SECOND += 1;
 
-        for (int i = 0; i < Bricks.length; i++) {
-            for (int j = 0; j < Bricks[i].length; j++) {
-                if (Bricks[i][j] == 1) {
-                    if (Collusion.checkShoot(x, y, (float) r, (float) r, j, i, Level.TILE_SCALE * Level.TILE_SIZE, Level.TILE_SCALE * Level.TILE_SIZE))
-                        return true;
-                }
-            }
-        }
 
         if (x < -r || x > Game.WIDTH + r ||
                 y < -r || y > Game.HEIGHT + r ||
@@ -77,5 +71,9 @@ public class Bullet {
         g.setColor(color1);
         g.fillOval((int) x - r, (int) y - r, 2 * r, 2 * r);
 
+    }
+
+    public void render(Graphics2D g) {
+        
     }
 }
