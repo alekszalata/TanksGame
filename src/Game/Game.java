@@ -2,6 +2,7 @@ package Game;
 
 import Display.Display;
 import KeyBoard.Input;
+import Level.Level;
 import Sprites.Sprite;
 import Sprites.SpriteSheet;
 import Utils.Time;
@@ -36,6 +37,7 @@ public class Game implements Runnable {
     private Player player;
     private Player2 player2;
     public static ArrayList<Bullet> bullets;
+    private Level level;
 
 
 
@@ -48,9 +50,10 @@ public class Game implements Runnable {
         textureImage = new Textures(TEXTURE_PATH);
         sheet = new SpriteSheet(textureImage.cut(0 , 0 , 32 , 32) , 2 , 16);
         sprite = new Sprite(sheet , 1);
-        player = new Player(400 , 300 ,3 , 3,3, textureImage);
-        player2 = new Player2(100 , 100 , 3 , 3, 3 ,textureImage);
+        player = new Player(0 , 568 ,2 , 3,3, textureImage);
+        player2 = new Player2(768 , 0 , 2 , 3, 3 ,textureImage);
         bullets = new ArrayList<Bullet>();
+        level = new Level(textureImage);
 
 
 
@@ -112,7 +115,7 @@ public class Game implements Runnable {
         }
     }
 
-    public synchronized void stop() {
+    public  synchronized void stop() {
         if (!running) return;
         running = false;
         try {
@@ -126,7 +129,7 @@ public class Game implements Runnable {
     private void update() {
         player.update(input);
         player2.update(input);
-
+        level.update();
         for (int i = 0; i < bullets.size(); i++){
             boolean remove = bullets.get(i).update();
             if (remove) {
@@ -139,11 +142,13 @@ public class Game implements Runnable {
 
     private void render() {
         Display.clearImage();
+        level.render(graphics);
         player2.render(graphics);
         player.render(graphics);
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).draw(graphics);
         }
+        level.renderBush(graphics);
         Display.swap();
 
     }

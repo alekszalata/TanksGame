@@ -100,13 +100,15 @@ public class Player extends Entity {
 
         if (input.getKey(KeyEvent.VK_ENTER)) firing = true;
 
+        if (HP - Bullet.DMG_TO_FIRST == 0) Display.close();
+
         if (firing) {
             long elapsed = (System.nanoTime() - firingTimer) / 1000000;
             if (elapsed > firingDelay) {
-                if (heading == Heading.NORTH) Game.bullets.add(new Bullet(270, newX1 + 23, newY1 ));  //почему 23 а не 16?
-                if (heading == Heading.EAST) Game.bullets.add(new Bullet(0, newX1 + 46, newY1 + 23));
-                if (heading == Heading.SOUTH) Game.bullets.add(new Bullet(90, newX1 + 23, newY1 + 46));
-                if (heading == Heading.WEST) Game.bullets.add(new Bullet(180, newX1, newY1 + 23));
+                if (heading == Heading.NORTH) Game.bullets.add(new Bullet(270, newX1 + (SPRITE_SCALE * scale)/2 - 1, newY1 ));  //почему 23 а не 16?
+                if (heading == Heading.EAST) Game.bullets.add(new Bullet(0, newX1 + (SPRITE_SCALE * scale) - 2, newY1 + (SPRITE_SCALE * scale)/2 - 1));
+                if (heading == Heading.SOUTH) Game.bullets.add(new Bullet(90, newX1 + (SPRITE_SCALE * scale)/2 - 1, newY1 + (SPRITE_SCALE * scale) - 2));
+                if (heading == Heading.WEST) Game.bullets.add(new Bullet(180, newX1, newY1 + (SPRITE_SCALE * scale)/2 - 1));
                 firingTimer = System.nanoTime();
             }
             firing = false;

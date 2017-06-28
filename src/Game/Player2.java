@@ -57,7 +57,7 @@ public class Player2 extends Entity {
     public Player2(float x, float y, float scale, float speed, int HP, Textures atlas) {
         super(EntityType.Player, x, y);
 
-        heading = Heading.NORTH;
+        heading = Heading.SOUTH;
         spriteMap = new HashMap<Heading, Sprite>();
         this.scale = scale;
         this.speed = speed;
@@ -99,14 +99,17 @@ public class Player2 extends Entity {
         if (input.getKey(KeyEvent.VK_SPACE)) firing = true;
 
 
+        if (HP - Bullet.DMG_TO_SECOND == 0) Display.close();
+
+
 
         if (firing) {
             long elapsed = (System.nanoTime() - firingTimer) / 1000000;
             if (elapsed > firingDelay) {
-                if (heading == Heading.NORTH) Game.bullets.add(new Bullet(270, newX2 + 23, newY2 ));  //почему 23 а не 24?
-                if (heading == Heading.EAST) Game.bullets.add(new Bullet(0, newX2 + 46, newY2 + 23));
-                if (heading == Heading.SOUTH) Game.bullets.add(new Bullet(90, newX2 + 23, newY2 + 46));
-                if (heading == Heading.WEST) Game.bullets.add(new Bullet(180, newX2 + 3, newY2 + 23));
+                if (heading == Heading.NORTH) Game.bullets.add(new Bullet(270, newX2 + (SPRITE_SCALE * scale)/2 - 1, newY2 ));  //почему 23 а не 24?
+                if (heading == Heading.EAST) Game.bullets.add(new Bullet(0, newX2 + (SPRITE_SCALE * scale) - 2, newY2 + (SPRITE_SCALE * scale)/2 - 1));
+                if (heading == Heading.SOUTH) Game.bullets.add(new Bullet(90, newX2 + (SPRITE_SCALE * scale)/2 - 1, newY2 + (SPRITE_SCALE * scale) - 2));
+                if (heading == Heading.WEST) Game.bullets.add(new Bullet(180, newX2, newY2 + (SPRITE_SCALE * scale)/2 - 1));
                 firingTimer = System.nanoTime();
             }
             firing = false;

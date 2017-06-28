@@ -1,5 +1,7 @@
 package Sprites;
 
+import Utils.Utils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -7,10 +9,12 @@ public class Sprite {
 
     private SpriteSheet sheet;
     private float scale; //увеличение объекта
+    private BufferedImage image;
 
     public Sprite(SpriteSheet sheet, float scale){
         this.sheet = sheet;
         this.scale = scale;
+
     }
 
     public void render(Graphics2D graphics,float x , float y){
