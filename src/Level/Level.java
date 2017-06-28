@@ -34,6 +34,8 @@ public class Level {
                 TILE_SCALE ,TileType.BRICK));
         tiles.put(TileType.BUSH , new Tile(atlas.cut(34 * TILE_SIZE , 4 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
                 TILE_SCALE ,TileType.BUSH));
+        tiles.put(TileType.EMPTY , new Tile(atlas.cut(36 * TILE_SIZE , 6 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
+                TILE_SCALE ,TileType.EMPTY));
 
         tileMap = Utils.levelReader("resources/Level.lvl");
 
@@ -47,7 +49,7 @@ public class Level {
             }
         }
 
-        bricks = new ArrayList<Point>();              //керпичи
+        bricks = new ArrayList<Point>();              //кирпичи
         for (int i = 0 ; i < tileMap.length ; i ++) {
             for (int j = 0; j < tileMap[i].length; j++) {
                 Tile tile = tiles.get(TileType.fromNumeric(tileMap[i][j]));
