@@ -8,7 +8,6 @@ import Sprites.SpriteSheet;
 import Utils.Time;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import Graphics.Textures;
@@ -18,12 +17,12 @@ public class Game implements Runnable {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     public static final String NAME = "Tanks";
-    public static final int COLOR_TO_CLEAR = 0xff000000;
-    public static final int NUM_OF_BUFFERS = 3;
+    public static final int COLOR_TO_CLEAR = 0xff000000; // цвет фона
+    public static final int NUM_OF_BUFFERS = 4;  // число бафферов
 
     public static final float UPDATE_RATE = 60.0f;              //сколько раз в сек обновляться
     public static final float UPD_INTERVAL = Time.second / UPDATE_RATE;       //каждые сколько времени обновляться
-    public static final long IDLE_TIME = 1;          //время дать thrad'у отойти (1мс)
+    public static final long IDLE_TIME = 1;          //время дать thread'у отойти (1мс)
 
     private static final String TEXTURE_PATH = "texture_atlas.png";
 
@@ -105,7 +104,7 @@ public class Game implements Runnable {
             }
 
             if (count >= Time.second) {
-                Display.titleSetting(NAME + " || Fps" + fps + " | Upd" + upd + " | UpdLoops" + updloops);
+                Display.titleSetting(NAME + " || Fps" + fps + " | Upd" + upd + " | UpdLoops" + updloops);  // вывод на рамку когда прошла секунда
                 upd =0;
                 fps = 0;
                 updloops = 0;
@@ -142,7 +141,7 @@ public class Game implements Runnable {
 
     private void render() {
         Display.clearImage();
-        level.render(graphics);
+        level.renderBricks(graphics);
         player.render(graphics);
         player2.render(graphics);
         for (int i = 0; i < bullets.size(); i++) {

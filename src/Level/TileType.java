@@ -12,10 +12,6 @@ package Level;
             this.n = n;
         }
 
-        public int numeric(){
-            return  n;
-        }
-
         public static TileType fromNumeric(int n) {
             switch (n) {
                 case 1:

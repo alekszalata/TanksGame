@@ -55,16 +55,13 @@ public class Bullet {
         if (Collusion.checkCollusion(x, y, (float) r * 2, (float) r *2, Player2.newX2 , Player2.newY2, Player2.SPRITE_SCALE * Player2.scale, Player2.SPRITE_SCALE * Player2.scale))
             DMG_TO_SECOND += 1;
 
-        for (Point p: Level.bricks){
-            if (Collusion.checkCollusion(x, y, (float) r * 2, (float) r *2, p.x , p.y, Level.TILE_IN_GAME, Level.TILE_IN_GAME)) return true;
-        }
 
 
-        if (x < -r || x > Game.WIDTH + r ||
+        if (    x < -r || x > Game.WIDTH + r ||
                 y < -r || y > Game.HEIGHT + r ||
                 Collusion.checkCollusion(x, y, (float) r * 2, (float) r *2, Player2.newX2 , Player2.newY2, Player2.SPRITE_SCALE * Player2.scale, Player2.SPRITE_SCALE * Player2.scale) ||
-                Collusion.checkCollusion(x, y, (float) r * 2, (float) r * 2, Player.newX1, Player.newY1, Player.SPRITE_SCALE* Player.scale, Player.SPRITE_SCALE* Player2.scale)
-                ) {
+                Collusion.checkCollusion(x, y, (float) r * 2, (float) r * 2, Player.newX1, Player.newY1, Player.SPRITE_SCALE* Player.scale, Player.SPRITE_SCALE* Player2.scale) ||
+                Level.bricks.stream().anyMatch(b -> Collusion.checkCollusion( x , y ,(float) r * 2 , (float) r * 2 ,(float) b.getX() ,(float) b.getY() ,Level.TILE_IN_GAME ,Level.TILE_IN_GAME))) {
             return true;
         }
 
@@ -77,7 +74,4 @@ public class Bullet {
 
     }
 
-    public void render(Graphics2D g) {
-
-    }
 }

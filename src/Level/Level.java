@@ -37,7 +37,7 @@ public class Level {
         tiles.put(TileType.EMPTY , new Tile(atlas.cut(18 * TILE_SIZE , 3 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
                 TILE_SCALE ,TileType.EMPTY));
 
-        tileMap = Utils.levelReader("resources/Level2.lvl");
+        tileMap = Utils.levelReader("resources/Level1.lvl");
 
 
         bushes = new ArrayList<Point>();               //кусты
@@ -62,16 +62,12 @@ public class Level {
     }
 
     public void update() {
-        for (Point p : bricks) {
-            if (Collusion.checkCollusion(Player2.newX2, Player2.newY2 - Player2.speed, Player2.SPRITE_SCALE * Player2.scale, Player2.SPRITE_SCALE * Player2.scale, p.x, p.y, TILE_IN_GAME, TILE_IN_GAME)) { Player2.a = true;}
-            else Player2.a = false;
-        }
     }
 
 
 
 
-    public void render(Graphics2D g){
+    public void renderBricks(Graphics2D g){
         for (Point p : bricks) {
             tiles.get(TileType.BRICK).render(g , p.x , p.y);
         }

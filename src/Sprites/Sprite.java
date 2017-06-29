@@ -1,6 +1,5 @@
 package Sprites;
 
-import Utils.Utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

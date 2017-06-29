@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class SpriteSheet {
     private BufferedImage sheet;
-    private int SpriteCount; //кол-во танчиков
+    private int SpriteCount; //кол-во танчиков если буду делать анимацию
     private int scale; // размер одного спрайта в нашем случае 16
     private int spriteWidth;  //кол-во спрайтов в ширину
 

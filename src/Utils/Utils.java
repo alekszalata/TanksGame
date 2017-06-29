@@ -17,7 +17,7 @@ public class Utils {
         return newImage;
     }
 
-    public static Integer[][] levelReader(String filepath) {
+    public static Integer[][] levelReader(String filepath) {   //считывает лвл с карты
         Integer[][] result = null;
 
         try(BufferedReader reader = new BufferedReader(new FileReader(new File(filepath)))) {
