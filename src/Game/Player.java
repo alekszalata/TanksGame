@@ -8,6 +8,7 @@ import java.util.Map;
 
 import Display.Display;
 import Graphics.Textures;
+import Level.Level;
 import Sprites.SpriteSheet;
 import KeyBoard.Input;
 import Sprites.Sprite;
@@ -83,16 +84,16 @@ public class Player extends Entity {
         newX1 = x;
         newY1 = y;
 
-        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1, newY1 - speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
+        if (input.getKey(KeyEvent.VK_UP) && !Collusion.checkCollusion(newX1, newY1 - speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)  && !Level.bricks.stream().anyMatch(b -> Collusion.checkCollusion( newX1 , newY1 - speed ,SPRITE_SCALE * scale , SPRITE_SCALE * scale ,(float) b.getX() ,(float) b.getY() ,Level.TILE_IN_GAME ,Level.TILE_IN_GAME ))) {
             newY1 -= speed;
             heading = Heading.NORTH;
-        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed, newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
+        } else if (input.getKey(KeyEvent.VK_RIGHT) && !Collusion.checkCollusion(newX1 + speed, newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale) && !Level.bricks.stream().anyMatch(b -> Collusion.checkCollusion( newX1 + speed , newY1 ,SPRITE_SCALE * scale , SPRITE_SCALE * scale ,(float) b.getX() ,(float) b.getY() ,Level.TILE_IN_GAME ,Level.TILE_IN_GAME ))) {
             newX1 += speed;
             heading = Heading.EAST;
-        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1, newY1 + speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
+        } else if (input.getKey(KeyEvent.VK_DOWN) && !Collusion.checkCollusion(newX1, newY1 + speed, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale) && !Level.bricks.stream().anyMatch(b -> Collusion.checkCollusion( newX1  , newY1 + speed ,SPRITE_SCALE * scale , SPRITE_SCALE * scale ,(float) b.getX() ,(float) b.getY() ,Level.TILE_IN_GAME ,Level.TILE_IN_GAME ))) {
             newY1 += speed;
             heading = Heading.SOUTH;
-        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale)) {
+        } else if (input.getKey(KeyEvent.VK_LEFT) && !Collusion.checkCollusion(newX1 - speed, newY1, SPRITE_SCALE * scale, SPRITE_SCALE * scale, Player2.newX2, Player2.newY2, SPRITE_SCALE * scale, SPRITE_SCALE * scale) && !Level.bricks.stream().anyMatch(b -> Collusion.checkCollusion( newX1 - speed , newY1 ,SPRITE_SCALE * scale , SPRITE_SCALE * scale ,(float) b.getX() ,(float) b.getY() ,Level.TILE_IN_GAME ,Level.TILE_IN_GAME ))) {
             newX1 -= speed;
             heading = Heading.WEST;
         }

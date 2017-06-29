@@ -40,9 +40,8 @@ public class Utils {
 
     public static final Integer[] string_to_array_array(String[] Array) {
         Integer[] result = new Integer[Array.length];
-
         for (int i = 0 ; i < Array.length; i++) {
-            result[i] = Integer.parseInt(Array[i]   );
+            result[i] = Integer.parseInt(Array[i]);
         }
         return result;
 

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Level {
 
-    public static final int TILE_SIZE = 8;
+    public static final int TILE_SIZE = 16;
     public static final int TILE_SCALE = 2;
     public static final int TILE_IN_GAME = TILE_SCALE * TILE_SIZE;
     public static final int TILES_IN_WIDTH = Game.WIDTH / TILE_IN_GAME;
@@ -24,20 +24,20 @@ public class Level {
 
     public static Integer[][] tileMap;
     public static Map<TileType , Tile > tiles;
-    private List<Point> bushes;
-    private List<Point> bricks;
+    public static List<Point> bushes;
+    public static List<Point> bricks;
 
     public Level (Textures atlas) {
         tileMap = new Integer[TILES_IN_WIDTH][TILES_IN_HEIGHT];
         tiles = new HashMap<TileType, Tile>();
-        tiles.put(TileType.BRICK , new Tile(atlas.cut(32 * TILE_SIZE , 0 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
+        tiles.put(TileType.BRICK , new Tile(atlas.cut(16 * TILE_SIZE , 0 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
                 TILE_SCALE ,TileType.BRICK));
-        tiles.put(TileType.BUSH , new Tile(atlas.cut(34 * TILE_SIZE , 4 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
+        tiles.put(TileType.BUSH , new Tile(atlas.cut(17 * TILE_SIZE , 2 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
                 TILE_SCALE ,TileType.BUSH));
-        tiles.put(TileType.EMPTY , new Tile(atlas.cut(36 * TILE_SIZE , 6 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
+        tiles.put(TileType.EMPTY , new Tile(atlas.cut(18 * TILE_SIZE , 3 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
                 TILE_SCALE ,TileType.EMPTY));
 
-        tileMap = Utils.levelReader("resources/Level.lvl");
+        tileMap = Utils.levelReader("resources/Level2.lvl");
 
 
         bushes = new ArrayList<Point>();               //кусты
@@ -62,6 +62,10 @@ public class Level {
     }
 
     public void update() {
+        for (Point p : bricks) {
+            if (Collusion.checkCollusion(Player2.newX2, Player2.newY2 - Player2.speed, Player2.SPRITE_SCALE * Player2.scale, Player2.SPRITE_SCALE * Player2.scale, p.x, p.y, TILE_IN_GAME, TILE_IN_GAME)) { Player2.a = true;}
+            else Player2.a = false;
+        }
     }
 
 

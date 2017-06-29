@@ -2,7 +2,6 @@ package KeyBoard;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.Arrays;
 
 public class Input extends JComponent{
      private boolean[] keyboard;
@@ -29,9 +28,6 @@ public class Input extends JComponent{
       }
      }
 
-     public boolean[]  getKeyboard(){
-         return Arrays.copyOf(keyboard , keyboard.length);
-     }
 
      public boolean getKey(int keyCode){
          return keyboard[keyCode];

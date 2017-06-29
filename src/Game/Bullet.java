@@ -50,16 +50,20 @@ public class Bullet {
         x += dx;
         y += dy;
 
-        if (Collusion.checkShoot(x, y, (float) r, (float) r, Player.newX1, Player.newY1, Player.SPRITE_SCALE, Player.SPRITE_SCALE))
+        if (Collusion.checkCollusion(x, y, (float) r * 2, (float) r * 2, Player.newX1, Player.newY1, Player.SPRITE_SCALE* Player.scale, Player.SPRITE_SCALE* Player2.scale))
             DMG_TO_FIRST += 1;
-        if (Collusion.checkShoot(x, y, (float) r, (float) r, Player2.newX2, Player2.newY2, Player2.SPRITE_SCALE, Player2.SPRITE_SCALE))
+        if (Collusion.checkCollusion(x, y, (float) r * 2, (float) r *2, Player2.newX2 , Player2.newY2, Player2.SPRITE_SCALE * Player2.scale, Player2.SPRITE_SCALE * Player2.scale))
             DMG_TO_SECOND += 1;
+
+        for (Point p: Level.bricks){
+            if (Collusion.checkCollusion(x, y, (float) r * 2, (float) r *2, p.x , p.y, Level.TILE_IN_GAME, Level.TILE_IN_GAME)) return true;
+        }
 
 
         if (x < -r || x > Game.WIDTH + r ||
                 y < -r || y > Game.HEIGHT + r ||
-                Collusion.checkShoot(x, y, (float) r, (float) r, Player2.newX2, Player2.newY2, Player2.SPRITE_SCALE, Player2.SPRITE_SCALE) ||
-                Collusion.checkShoot(x, y, (float) r, (float) r, Player.newX1, Player.newY1, Player.SPRITE_SCALE, Player.SPRITE_SCALE)
+                Collusion.checkCollusion(x, y, (float) r * 2, (float) r *2, Player2.newX2 , Player2.newY2, Player2.SPRITE_SCALE * Player2.scale, Player2.SPRITE_SCALE * Player2.scale) ||
+                Collusion.checkCollusion(x, y, (float) r * 2, (float) r * 2, Player.newX1, Player.newY1, Player.SPRITE_SCALE* Player.scale, Player.SPRITE_SCALE* Player2.scale)
                 ) {
             return true;
         }

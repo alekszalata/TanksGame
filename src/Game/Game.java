@@ -143,8 +143,8 @@ public class Game implements Runnable {
     private void render() {
         Display.clearImage();
         level.render(graphics);
-        player2.render(graphics);
         player.render(graphics);
+        player2.render(graphics);
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).draw(graphics);
         }
