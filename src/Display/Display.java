@@ -40,8 +40,8 @@ public abstract class Display {
         ((Graphics2D)imageGraphics).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);   //сглаживание объекта
         colortoClear = _colortoClear;
 
-        windowContent.createBufferStrategy(numOfBuffers);
-        bufferStrategy = windowContent.getBufferStrategy();
+        windowContent.createBufferStrategy(numOfBuffers);  //число бафферов
+        bufferStrategy = windowContent.getBufferStrategy(); //замена
 
         created = true;
     }

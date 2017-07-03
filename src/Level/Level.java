@@ -37,7 +37,7 @@ public class Level {
         tiles.put(TileType.EMPTY , new Tile(atlas.cut(18 * TILE_SIZE , 3 * TILE_SIZE , TILE_SIZE , TILE_SIZE),
                 TILE_SCALE ,TileType.EMPTY));
 
-        tileMap = Utils.levelReader("resources/Level1.lvl");
+        tileMap = Utils.levelReader("resources/Level2.lvl");
 
 
         bushes = new ArrayList<Point>();               //кусты
@@ -61,7 +61,7 @@ public class Level {
 
     }
 
-    public void update() {
+    public void update() { //если буду делать разбивание кирпичей
     }
 
 

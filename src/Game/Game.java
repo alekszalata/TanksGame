@@ -3,8 +3,6 @@ package Game;
 import Display.Display;
 import KeyBoard.Input;
 import Level.Level;
-import Sprites.Sprite;
-import Sprites.SpriteSheet;
 import Utils.Time;
 
 import java.awt.*;
@@ -31,8 +29,6 @@ public class Game implements Runnable {
     private Input input;
     private Graphics2D graphics;
     private Textures textureImage;
-    private SpriteSheet sheet;
-    private Sprite sprite;
     private Player player;
     private Player2 player2;
     public static ArrayList<Bullet> bullets;
@@ -47,8 +43,6 @@ public class Game implements Runnable {
         input = new Input();
         Display.InputListener(input);
         textureImage = new Textures(TEXTURE_PATH);
-        sheet = new SpriteSheet(textureImage.cut(0 , 0 , 32 , 32) , 2 , 16);
-        sprite = new Sprite(sheet , 1);
         player = new Player(0 , 568 ,2 , 3,3, textureImage);
         player2 = new Player2(768 , 0 , 2 , 3, 3 ,textureImage);
         bullets = new ArrayList<Bullet>();

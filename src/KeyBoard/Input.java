@@ -9,7 +9,7 @@ public class Input extends JComponent{
 
      public Input(){
       keyboard = new boolean[255];
-      for (int i = 0 ; i <keyboard.length ; i++) {
+      for (int i = 0 ; i <keyboard.length ; i++) {   //для каждой кнопки
           final int  KEY_CODE = i;
 
           getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(i, 0, false), i * 2); //нажатие кнопок только когда окно в фокусе , i = значение копки в коде , false = нажата , i*2 "название" для действия
